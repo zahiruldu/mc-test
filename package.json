@@ -8,7 +8,7 @@
     },
     "scripts": {
         "test": "./node_modules/mocha/bin/mocha test --timeout 60000",
-        "start": "node server.js",
+        "start": "DEBUG=* node server.js",
         "pretest": "./node_modules/jshint/bin/jshint app && ./node_modules/jshint/bin/jshint config"
     },
     "repository": {
