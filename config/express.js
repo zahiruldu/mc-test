@@ -31,11 +31,7 @@ module.exports = function() {
     if (app.get('env') === 'production') {
         app.use(function(req, res, next) {
             let protocol = req.get('x-forwarded-proto');
-            if (protocol == 'https') {
-                next();
-            }
-            next();
-            //res.redirect('https://' + req.hostname + req.url);
+            protocol = 'https' ? next() : res.redirect('https://' + req.hostname + req.url);
         });
     }
     //Dynamic Route file configuration
