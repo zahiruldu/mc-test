@@ -15,8 +15,8 @@ module.exports = function() {
     };
 
     const app = express();
-    app.set('port', process.env.PORT || 8888);
-    app.set('env', process.env.NODE_ENV || 'development');
+    app.set('port', process.env.PORT || process.env.APP_PORT);
+    app.set('env', process.env.NODE_ENV || process.env.APP_ENV);
     //Middlewares
     app.use(cors({
         origin: true,
@@ -34,7 +34,7 @@ module.exports = function() {
             protocol == 'https' ? next() : res.redirect('https://' + req.hostname + req.url);
         });
     }
-    //Including routes dynamically
+    //Dynamic Route file configuration
     let filePath = require('path').join(__dirname, '../app/routes');
     fs.readdirSync(filePath).forEach((file) => {
         require('../app/routes/' + file)(app);
