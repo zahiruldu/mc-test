@@ -8,7 +8,8 @@
     },
     "scripts": {
         "test": "./node_modules/mocha/bin/mocha test --timeout 60000",
-        "npm start": "DEBUG=* node server.js"
+        "start": "DEBUG=* node server.js",
+        "pretest": "./node_modules/jshint/bin/jshint app && ./node_modules/jshint/bin/jshint config"
     },
     "repository": {
         "type": "git",
@@ -32,9 +33,14 @@
         "morgan": "^1.8.2",
         "node-fetch": "^1.7.3"
     },
+    "bin": {
+        "jshint": "./bin/jshint"
+    },
+
     "devDependencies": {
         "chai": "^4.1.2",
         "chai-http": "^3.0.0",
+        "jshint": "^2.9.5",
         "mocha": "^3.5.2"
     }
 }

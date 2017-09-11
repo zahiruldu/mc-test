@@ -6,4 +6,4 @@ module.exports = app => {
         vehicle.route('/:modelYear/:manufacturer/:model').get(controller.getVehicle);
         vehicle.route('/').post(controller.getVehicle);
     });
-}
+};

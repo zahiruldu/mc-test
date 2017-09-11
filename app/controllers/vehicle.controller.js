@@ -23,7 +23,7 @@ exports.getVehicle = (req, res) => {
                     res.send(body);
                 } else {
                     // Making rating map with promises
-                    let ratingPromises = body.Results.map((vehicle, indx) => {
+                    let ratingPromises = body.Results.map((vehicle) => {
                         return new Promise((resolve, reject) => {
                             // Query for rating
                             fetch(RatingUrl(vehicle.VehicleId))
@@ -46,7 +46,8 @@ exports.getVehicle = (req, res) => {
                             res.send(body);
                         })
                         .catch(error => {
-                            res.send({ Count: 0, Results: [] });
+                            if (error)
+                                res.send({ Count: 0, Results: [] });
                         });
                 }
 
@@ -57,7 +58,8 @@ exports.getVehicle = (req, res) => {
             }
         }).catch(function(error) {
             //console.log(error);
-            res.send({ Count: 0, Results: [] });
+            if (error)
+                res.send({ Count: 0, Results: [] });
         });
 };
 

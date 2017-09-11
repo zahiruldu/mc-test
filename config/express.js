@@ -1,7 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
-const path = require('path');
+//const path = require('path');
 const logger = require('morgan');
 const fs = require('fs');
 
@@ -31,7 +31,10 @@ module.exports = function() {
     if (app.get('env') === 'production') {
         app.use(function(req, res, next) {
             let protocol = req.get('x-forwarded-proto');
-            protocol == 'https' ? next() : res.redirect('https://' + req.hostname + req.url);
+            if (protocol == 'https') {
+                next();
+            }
+            res.redirect('https://' + req.hostname + req.url);
         });
     }
     //Dynamic Route file configuration
@@ -40,4 +43,4 @@ module.exports = function() {
         require('../app/routes/' + file)(app);
     });
     return app;
-}
+};
