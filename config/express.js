@@ -34,7 +34,8 @@ module.exports = function() {
             if (protocol == 'https') {
                 next();
             }
-            res.redirect('https://' + req.hostname + req.url);
+            next();
+            //res.redirect('https://' + req.hostname + req.url);
         });
     }
     //Dynamic Route file configuration
