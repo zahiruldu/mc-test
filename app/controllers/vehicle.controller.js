@@ -8,7 +8,7 @@ exports.getVehicle = (req, res) => {
     var modelYear = req.params.modelYear || req.body.modelYear;
     var manufacturer = req.params.manufacturer || req.body.manufacturer;
     var model = req.params.model || req.body.model;
-    var isRatingQueried = req.query.withRating;
+    var isRatingQueried = req.query.withRating || req.body.withRating;
 
     const firstUrl = (mY, mF, m) => 'https://one.nhtsa.gov/webapi/api/SafetyRatings/modelyear/' + mY + '/make/' + mF + '/model/' + m + '?format=json';
     const RatingUrl = vId => 'https://one.nhtsa.gov/webapi/api/SafetyRatings/VehicleId/' + vId + '?format=json';
