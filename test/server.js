@@ -23,7 +23,6 @@ describe('Server', () => {
                 .get('/')
                 .end((err, res) => {
                     res.should.have.status(200);
-                    console.log(res.body)
                     res.body.should.be.a('object');
                     res.body.should.have.property('message');
                     res.body.message.should.eql('Welcome to Modus Create!');

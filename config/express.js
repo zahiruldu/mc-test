@@ -16,6 +16,7 @@ module.exports = function() {
 
     const app = express();
     app.set('port', process.env.PORT || 8888);
+    app.set('env', process.env.NODE_ENV || 'development');
     //Middlewares
     app.use(cors({
         origin: true,

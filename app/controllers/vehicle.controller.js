@@ -18,7 +18,7 @@ exports.getVehicle = (req, res) => {
             return result.json();
         }).then(function(body) {
             if (body.Results.length > 0) {
-                if (isRatingQueried == undefined || isRatingQueried === 'false') {
+                if (isRatingQueried == undefined || isRatingQueried !== 'true') {
                     delete body.Message;
                     res.send(body);
                 } else {
@@ -41,20 +41,23 @@ exports.getVehicle = (req, res) => {
                     });
                     // working with all promises;
                     Promise.all(ratingPromises).then(values => {
-                        body.Results = values;
-                        delete body.Message;
-                        res.send(body);
-                    });
+                            body.Results = values;
+                            delete body.Message;
+                            res.send(body);
+                        })
+                        .catch(error => {
+                            res.send({ Count: 0, Results: [] });
+                        });
                 }
 
             } else {
-                console.log('outside loop')
+                // console.log('outside loop')
                 delete body.Message;
                 res.send(body);
             }
         }).catch(function(error) {
-            console.log(error);
-            res.send(error);
+            //console.log(error);
+            res.send({ Count: 0, Results: [] });
         });
 };
 

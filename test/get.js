@@ -65,7 +65,7 @@ describe('/GET Methods', () => {
     });
 
     describe('/vehicles Get Method response with rating as banana query information', () => {
-        it('Getting car information with crash Rating for banana query', (done) => {
+        it('Getting car information without crash Rating for banana query', (done) => {
             chai.request(server)
                 .get('/vehicles/2015/Audi/A3')
                 .query({ withRating: 'banana' })
@@ -76,7 +76,7 @@ describe('/GET Methods', () => {
                     res.body.should.have.property('Results');
                     res.body.should.not.have.property('Message');
                     res.body.Results.should.be.a('array');
-                    res.body.Results[0].should.have.property('CrashRating');
+                    res.body.Results[0].should.not.have.property('CrashRating');
                     done();
                 });
         });
